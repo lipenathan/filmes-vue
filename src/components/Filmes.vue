@@ -26,18 +26,16 @@
                 <p> Lista vazia </p>
             </template>
             <template v-else>
-                <div>
-                    <div class="item-filme" v-for="filme in filmes" :key="filme.id"> <!-- passando id para o :key, assim o vue consegue indexar e identificar melhor os itens da lista -->
-                        <p>Título: {{ filme.titulo }}|| Ano: {{ filme.ano }} || Diretor: {{ filme.diretor }}</p><button
-                            @click="deletar(filme.id)" class="excluir">Excluir</button> <!-- Chamando o método de exclusão passando o id do item -->
-                    </div>
-                </div>
+                
+                    <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar"/>
+                
             </template>
         </div>
     </div>
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+import ItemFilme from '../components/ItemFilme.vue'
 //ref para atributos reativos simples
 //reactive para atributos reativos complexos
 
@@ -139,14 +137,7 @@ button {
 .filmes {
     margin-top: 5vh;
     text-align: center;
-}
-
-.item-filme p {
-    display: inline;
-}
-
-.excluir {
-    padding: 0;
-    margin-left: 6vh;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 </style>
