@@ -1,6 +1,6 @@
 <template>
-    <div class="item-filme" >
-        <p>Título: {{ filme.titulo }}|| Ano: {{ filme.ano }} || Diretor: {{ filme.diretor }}</p><button
+    <div class="item-filme">
+        <p @click="clicado">Título: {{ filme.titulo }}|| Ano: {{ filme.ano }} || Diretor: {{ filme.diretor }}</p><button
             @click="deletar()" class="excluir">Excluir</button>
     </div>
 </template>
@@ -20,11 +20,10 @@ const emit = defineEmits(['excluirClicado'])
 function deletar() {
     emit('excluirClicado', props.filme.id)
 }
+
 </script>
 <style scoped>
-
 .item-filme {
-    margin-bottom: 20px;
     background-color: blue;
     font-weight: 700;
     border-radius: 15px;

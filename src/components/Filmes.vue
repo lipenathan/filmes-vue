@@ -1,7 +1,5 @@
 <template>
-    <div class="titulo">
-        <h2>Bons Filmes</h2>
-    </div>
+
     <div class="body">
         <label>
             Título
@@ -21,21 +19,24 @@
 
         <button @click="submeter"> Cadastrar Filme </button>
 
-        <div class="filmes">
+        <TabelaFilmes>
             <template v-if="filmes.length == 0">
                 <p> Lista vazia </p>
             </template>
             <template v-else>
-                
-                    <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar"/>
-                
+                <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar" />
+
             </template>
-        </div>
+        </TabelaFilmes>
     </div>
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import ItemFilme from '../components/ItemFilme.vue'
+import TabelaFilmes from '../components/TabelaFilmes.vue'
+import ItemFilme from '../components/ItemFilme.vue' //importa um componente para ser utilizado dentro deste componente,
+//através da sintaxe reduzida não precisamos exportar os compoentes de forma individual
+
+
 //ref para atributos reativos simples
 //reactive para atributos reativos complexos
 
@@ -76,8 +77,12 @@ function submeter() { //método que realiza cadastro de filme, utilizando valore
 }
 
 function deletar(id) {//método para deletar item de acordo com o id
-    var index = filmes.findIndex(filme => filme.id === id )
+    var index = filmes.findIndex(filme => filme.id === id)
     filmes.splice(index, 1)
+}
+
+function itemClicado() {
+    alert('Algum item foi clicadinho')
 }
 
 </script>
@@ -134,10 +139,5 @@ button {
     cursor: pointer;
 }
 
-.filmes {
-    margin-top: 5vh;
-    text-align: center;
-    padding-left: 40px;
-    padding-right: 40px;
-}
+
 </style>

@@ -2,5 +2,10 @@
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import Menu from './components/Menu.vue'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+app.component('Menu', Menu)
+
+app.mount('#app')

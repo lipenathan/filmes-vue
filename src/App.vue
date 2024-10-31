@@ -1,13 +1,12 @@
 <script setup>
-import Filmes from './components/Filmes.vue'
+import TelaInicial from './views/TelaInicial.vue'
 </script>
 
 <template>
   <header>
   </header>
-
   <main>
-    <Filmes />
+    <TelaInicial />
   </main>
 </template>
 
