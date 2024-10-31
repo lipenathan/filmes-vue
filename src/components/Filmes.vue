@@ -20,12 +20,13 @@
         <button @click="submeter"> Cadastrar Filme </button>
 
         <TabelaFilmes>
-            <template v-if="filmes.length == 0">
-                <p> Lista vazia </p>
-            </template>
-            <template v-else>
-                <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar" />
-
+            <template #styled>
+                <template v-if="filmes.length == 0">
+                    <p> Lista vazia </p>
+                </template>
+                <template v-else>
+                    <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar" />
+                </template>
             </template>
         </TabelaFilmes>
     </div>
@@ -138,6 +139,4 @@ button {
     font-size: 16px;
     cursor: pointer;
 }
-
-
 </style>

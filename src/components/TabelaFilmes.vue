@@ -1,6 +1,8 @@
 <template>
     <div class="tabela">
-        <slot></slot>
+        <slot name="styled"></slot> <!-- Conteúdo passado pelo componente pai -->
+    </div>
+    <div>
     </div>
 </template>
 <script setup>
