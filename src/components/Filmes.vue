@@ -1,13 +1,10 @@
 <template>
-    <div class="titulo">
-        <h2>Bons Filmes</h2>
-    </div>
+    <Menu :tituloMenu="tituloMenu"></Menu>
     <div class="body">
         <label>
             Título
             <input v-model="titulo" type="text" placeholder="Título" required>
         </label>
-
         <label>
             Ano
             <input v-model="ano" type="number" placeholder="Ano" required>
@@ -26,21 +23,24 @@
                 <p> Lista vazia </p>
             </template>
             <template v-else>
-                <div>
-                    <div class="item-filme" v-for="filme in filmes" :key="filme.id"> <!-- passando id para o :key, assim o vue consegue indexar e identificar melhor os itens da lista -->
-                        <p>Título: {{ filme.titulo }}|| Ano: {{ filme.ano }} || Diretor: {{ filme.diretor }}</p><button
-                            @click="deletar(filme.id)" class="excluir">Excluir</button> <!-- Chamando o método de exclusão passando o id do item -->
+                <TabelaFilmes>
+                    <div class="item-filme" v-for="filme in filmes" :key="filme.id">
+                        <ItemFilme :filme="filme" @clicouExcluir="deletar" ></ItemFilme>
                     </div>
-                </div>
+                </TabelaFilmes>
             </template>
         </div>
     </div>
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
+import ItemFilme from '../components/ItemFilme.vue'
+import TabelaFilmes from '../components/TabelaFilmes.vue'
+
 //ref para atributos reativos simples
 //reactive para atributos reativos complexos
 
+const tituloMenu = ref("Cadastro Filmes")
 const titulo = ref("")
 const ano = ref("")
 const diretor = ref("")
@@ -78,7 +78,7 @@ function submeter() { //método que realiza cadastro de filme, utilizando valore
 }
 
 function deletar(id) {//método para deletar item de acordo com o id
-    var index = filmes.findIndex(filme => filme.id === id )
+    var index = filmes.findIndex(filme => filme.id === id)
     filmes.splice(index, 1)
 }
 
@@ -139,10 +139,9 @@ button {
 .filmes {
     margin-top: 5vh;
     text-align: center;
-}
-
-.item-filme p {
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .excluir {
