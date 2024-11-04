@@ -1,5 +1,4 @@
 <template>
-
     <div class="body">
         <label>
             Título
@@ -18,23 +17,10 @@
         </label>
 
         <button @click="submeter"> Cadastrar Filme </button>
-
-        <TabelaFilmes>
-            <template #styled>
-                <template v-if="filmes.length == 0">
-                    <p> Lista vazia </p>
-                </template>
-                <template v-else>
-                    <ItemFilme v-for="filme in filmes" :key="filme.id" :filme="filme" @excluir-clicado="deletar" />
-                </template>
-            </template>
-        </TabelaFilmes>
     </div>
 </template>
 <script setup>
-import { ref, reactive } from 'vue'
-import TabelaFilmes from '../components/TabelaFilmes.vue'
-import ItemFilme from '../components/ItemFilme.vue' //importa um componente para ser utilizado dentro deste componente,
+import { ref } from 'vue'
 //através da sintaxe reduzida não precisamos exportar os compoentes de forma individual
 
 
@@ -44,8 +30,9 @@ import ItemFilme from '../components/ItemFilme.vue' //importa um componente para
 const titulo = ref("")
 const ano = ref("")
 const diretor = ref("")
-var filmes = reactive([])
 var id = 0 //não reativa. variável que será utilizada somente para lógica de atribuir ids aos componentes
+
+const emit = defineEmits(['cadastrouFilme'])
 
 function submeter() { //método que realiza cadastro de filme, utilizando valores reativos que usuário digitou
     if (titulo.value.length == 0) {
@@ -70,20 +57,11 @@ function submeter() { //método que realiza cadastro de filme, utilizando valore
         'diretor': diretor.value
     }
 
+    emit('cadastrouFilme', filme) //emite evento de filme cadastrato
+
     titulo.value = ""
     ano.value = ""
     diretor.value = ""
-
-    filmes.push(filme)
-}
-
-function deletar(id) {//método para deletar item de acordo com o id
-    var index = filmes.findIndex(filme => filme.id === id)
-    filmes.splice(index, 1)
-}
-
-function itemClicado() {
-    alert('Algum item foi clicadinho')
 }
 
 </script>
@@ -108,14 +86,7 @@ function itemClicado() {
     margin-left: 4vh;
 }
 
-.body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10vh;
-    height: 100vh;
-    text-align: center;
-}
+
 
 label {
     display: flex;
