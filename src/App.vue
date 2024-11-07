@@ -1,12 +1,15 @@
 <script setup>
-import Filmes from './views/Filmes.vue'
 </script>
 
 <template>
-  <header>
-  </header>
+  <Menu>
+    <div class="nav">
+      <RouterLink class="route" to="/"> Início </RouterLink>
+      <RouterLink class="route" to="/detalhes"> Detalhes </RouterLink>
+    </div>
+  </Menu>
   <main>
-    <Filmes />
+    <RouterView />
   </main>
 </template>
 
@@ -36,5 +39,18 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+}
+
+.route {
+  color: black;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 600;
+  margin-left: 20px;
+}
+
+.nav {
+  display: inline;
+  margin-left: 80px;
 }
 </style>

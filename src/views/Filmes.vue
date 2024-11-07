@@ -1,8 +1,5 @@
 <template>
     <Pagina><!-- Componente Registrado globalmente -->
-        <template #header>
-            <Menu titulo='Bons Filmes'></Menu><!-- Componente Registrado globalmente -->
-        </template>
         <template #body>
             <formulario-filme @cadastrou-filme="atualizarLista" />
             <tabela-filmes :filmes="filmes" @item-excluido="deletar" />
@@ -14,11 +11,15 @@
 import { reactive } from 'vue'
 import FormularioFilme from '../components/filmes/FormularioFilme.vue'
 import TabelaFilmes from '../components/filmes/TabelaFilmes.vue'
+import router from '@/routes';
 
 const filmes = reactive([])
 
 function atualizarLista(filme) {
     filmes.push(filme)
+    if (filmes.length > 3) {
+        router.push('/detalhes') //redireciona para tela de detalhes
+    }
 }
 
 function deletar(id) {

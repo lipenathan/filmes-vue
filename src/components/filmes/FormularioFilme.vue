@@ -22,7 +22,11 @@
 <script setup>
 import { ref } from 'vue'
 //através da sintaxe reduzida não precisamos exportar os compoentes de forma individual
+import { useUserStore } from '../../store/store'; // Importa o store
+import { computed } from 'vue'; // Importa a função `computed` para reatividade
 
+const userStore = useUserStore(); 
+const storeFilme = computed(() => userStore.filmeTitulo);
 
 //ref para atributos reativos simples
 //reactive para atributos reativos complexos
@@ -57,6 +61,7 @@ function submeter() { //método que realiza cadastro de filme, utilizando valore
         'diretor': diretor.value
     }
 
+    userStore.setFilme(filme)
     emit('cadastrouFilme', filme) //emite evento de filme cadastrato
 
     titulo.value = ""
@@ -70,23 +75,6 @@ function submeter() { //método que realiza cadastro de filme, utilizando valore
     margin: 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
-.titulo {
-    background-color: blue;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 10vh;
-}
-
-.titulo>h2 {
-    display: inline;
-    text-align: start;
-    margin-left: 4vh;
-}
-
-
 
 label {
     display: flex;
