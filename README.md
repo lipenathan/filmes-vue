@@ -15,13 +15,10 @@ Os inputs.
 - Caso a lista esteja vazia, tratar e mostrar uma mensagem ao usuário.
 - Fazer tratamentos dos campos e limpá-los após completo.
 
-### Aula dia 31/10/2024 ###
+### Aula dia 07/11/2024 ###
 ### Conteúdos abordados ###
-- Event Modifiers
-- Reutilização de componentes - Global e Local
-- Propriedades
-- Emitindo Eventos
-- Slots
+- Routing com Vue-Router
+- Pinia para salvar estado
 
 Executar o projeto de forma local
 

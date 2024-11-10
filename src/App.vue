@@ -5,7 +5,7 @@
   <Menu>
     <div class="nav">
       <RouterLink class="route" to="/"> Início </RouterLink>
-      <RouterLink class="route" to="/detalhes"> Detalhes </RouterLink>
+      <RouterLink class="route" :to="{ name: 'dtl' }"> Detalhes </RouterLink>
     </div>
   </Menu>
   <main>
